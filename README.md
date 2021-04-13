@@ -1,6 +1,10 @@
 jitsi-meet-torture
 ==================
 
+Now altered to allow passing in a jwt, the malleus script can be run as
+
+./scripts/malleus.sh --conferences=2 --participants=2 --duration=120 --room-name-prefix=johnnycage --hub-url=http://someUser:somePassword@<ggr instance>:4444/wd/hub --instance-url=https://video.something.com  --jwt=eyJhbGciOiJ...
+
 # Running 
 To run tests against a Jitsi-Meet instance running on `https://meet.example.com use`:
 
