@@ -5,7 +5,7 @@ if [ -n "$DEBUG" ]; then
 fi
 
 usage() {
-  echo "Usage: $0 [--conferences=MALLEUS_CONFERENCES] [--participants=MALLEUS_PARTICIPANTS] [--senders=MALLEUS_SENDERS] [--audio-senders=MALLEUS_AUDIO_SENDERS] [--senders-per-node=MALLEUS_SENDERS_PER_NODE] [--receivers-per-node=MALLEUS_RECEIVERS_PER_NODE] [--duration=MALLEUS_DURATION (s)] [--join-delay=MALLEUS_JOIN_DELAY (ms)] [--room-name-prefix=MALLEUS_ROOM_NAME_PREFIX] [--hub-url=MALLEUS_HUB_URL] [--instance-url=MALLEUS_INSTANCE_URL] [--regions=MALLEUS_REGIONS] [--use-node-types] [--use-load-test] [--max-disrupted-bridges-pct=MALLEUS_MAX_DISRUPTED_BRIDGES_PCT] [--debug] [--switch-speakers] [--use-stage-view]" >&2
+  echo "Usage: $0 [--jwt=MALLEUS_JWT] [--conferences=MALLEUS_CONFERENCES] [--participants=MALLEUS_PARTICIPANTS] [--senders=MALLEUS_SENDERS] [--audio-senders=MALLEUS_AUDIO_SENDERS] [--senders-per-node=MALLEUS_SENDERS_PER_NODE] [--receivers-per-node=MALLEUS_RECEIVERS_PER_NODE] [--duration=MALLEUS_DURATION (s)] [--join-delay=MALLEUS_JOIN_DELAY (ms)] [--room-name-prefix=MALLEUS_ROOM_NAME_PREFIX] [--hub-url=MALLEUS_HUB_URL] [--instance-url=MALLEUS_INSTANCE_URL] [--regions=MALLEUS_REGIONS] [--use-node-types] [--use-load-test] [--max-disrupted-bridges-pct=MALLEUS_MAX_DISRUPTED_BRIDGES_PCT] [--debug] [--switch-speakers] [--use-stage-view]" >&2
   exit 1
 }
 
@@ -99,6 +99,7 @@ case $1 in
         --hub-url) MALLEUS_HUB_URL=$optvalue;;
         --instance-url) MALLEUS_INSTANCE_URL=$optvalue;;
         --regions) MALLEUS_REGIONS=$optvalue;;
+        --jwt) MALLEUS_JWT=$optvalue;;
         --use-node-types) if [ -n "$optvalue" ]; then MALLEUS_USE_NODE_TYPES=$optvalue; else MALLEUS_USE_NODE_TYPES=true; fi;;
         --use-load-test) if [ -n "$optvalue" ]; then MALLEUS_USE_LOAD_TEST=$optvalue; else MALLEUS_USE_LOAD_TEST=true; fi;;
         --switch-speakers) if [ -n "$optvalue" ]; then MALLEUS_SWITCH_SPEAKERS=$optvalue; else MALLEUS_SWITCH_SPEAKERS=true; fi;;
@@ -171,6 +172,7 @@ mvn \
 -Dorg.jitsi.malleus.join_delay=$MALLEUS_JOIN_DELAY \
 -Dorg.jitsi.malleus.room_name_prefix=$MALLEUS_ROOM_NAME_PREFIX \
 -Dorg.jitsi.malleus.regions=$MALLEUS_REGIONS \
+-Dorg.jitsi.malleus.jwt=$MALLEUS_JWT \
 -Dorg.jitsi.malleus.use_node_types=$MALLEUS_USE_NODE_TYPES \
 -Dorg.jitsi.meet.test.util.blip_script=$MALLEUS_BLIP_SCRIPT \
 -Dorg.jitsi.malleus.use_load_test=$MALLEUS_USE_LOAD_TEST \

@@ -36,7 +36,8 @@ public class MalleusJitsificus
      * The video file to use as input for the first participant (the sender).
      */
     private static final String INPUT_VIDEO_FILE
-        = "resources/FourPeople_1280x720_30.y4m";
+        = "resources/FakeVideoStream.y4m";
+//            = "resources/FourPeople_1280x720_30.y4m";
 
     public static final String CONFERENCES_PNAME
         = "org.jitsi.malleus.conferences";
@@ -66,6 +67,8 @@ public class MalleusJitsificus
         = "org.jitsi.malleus.switch_speakers";
     public static final String USE_STAGE_VIEW
         = "org.jitsi.malleus.use_stage_view";
+    public static final String JWT
+        = "org.jitsi.malleus.jwt";
 
     private final Phaser allHungUp = new Phaser();
 
@@ -121,6 +124,8 @@ public class MalleusJitsificus
         boolean enableP2p
             = enableP2pStr == null || Boolean.parseBoolean(enableP2pStr);
 
+//        boolean enableP2p = false; // RD 4/12/21, no peer to peer for now
+
         float maxDisruptedBridges = 0;
         String maxDisruptedBridgesStr = System.getProperty(MAX_DISRUPTED_BRIDGES_PCT_PNAME);
         if (!"".equals(maxDisruptedBridgesStr))
@@ -138,7 +143,7 @@ public class MalleusJitsificus
         context.getCurrentXmlTest().getSuite()
             .setDataProviderThreadCount(numConferences);
 
-        print("will run with:");
+        print("will run withe:");
         print("conferences="+ numConferences);
         print("participants=" + numParticipants);
         print("senders=" + numSenders);
@@ -151,6 +156,9 @@ public class MalleusJitsificus
         print("regions=" + (regions == null ? "null" : Arrays.toString(regions)));
         print("stage view=" + useStageView);
 
+        String jwt = System.getProperty(JWT);
+        jwt = "jwt=" + jwt;
+
         Object[][] ret = new Object[numConferences][4];
         for (int i = 0; i < numConferences; i++)
         {
@@ -159,11 +167,12 @@ public class MalleusJitsificus
                 = participants.getJitsiMeetUrl()
                 .setRoomName(roomName)
                 // XXX I don't remember if/why these are needed.
-                .appendConfig("config.p2p.useStunTurn=true")
-                .appendConfig("config.disable1On1Mode=false")
-                .appendConfig("config.testing.noAutoPlayVideo=true")
-                .appendConfig("config.pcStatsInterval=10000")
-                .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"));
+                    .appendConfig("config.p2p.useStunTurn=true")
+                    .appendConfig("config.disable1On1Mode=false")
+                    .appendConfig("config.testing.noAutoPlayVideo=true")
+                    .appendConfig("config.pcStatsInterval=10000")
+                    .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"))
+                    .appendConfig(jwt, false);
 
             if (useStageView)
                 url.appendConfig("config.disableTileView=true");

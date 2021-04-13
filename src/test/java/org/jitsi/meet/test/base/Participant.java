@@ -477,16 +477,17 @@ public abstract class Participant<T extends WebDriver>
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         File scrFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         File dstFile = new File(outputDir, fileName);
-        try
-        {
-            FileUtils.moveFile(scrFile, dstFile);
-        }
-        catch (IOException ioe)
-        {
-            throw new RuntimeException(
-                "Failed to move the screenshot file, from: "
-                    + scrFile.toString() + " to: " + dstFile.toString(), ioe);
-        }
+// 4/12/21 RD: Getting some errors here, don't worry about screenshot for now
+//        try
+//        {
+//            FileUtils.moveFile(scrFile, dstFile);
+//        }
+//        catch (IOException ioe)
+//        {
+//            throw new RuntimeException(
+//                "Failed to move the screenshot file, from: "
+//                    + scrFile.toString() + " to: " + dstFile.toString(), ioe);
+//        }
     }
 
     /**

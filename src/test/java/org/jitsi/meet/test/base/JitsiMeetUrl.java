@@ -21,6 +21,8 @@ import org.apache.commons.lang3.*;
 import java.net.*;
 import java.util.*;
 
+import static org.jitsi.meet.test.util.TestUtils.print;
+
 /**
  * Convenience class for dealing with Jitsi Meet conference URL components.
  *
@@ -351,12 +353,14 @@ public class JitsiMeetUrl
     {
         String url = serverUrl + "/" + roomName;
 
-        if (StringUtils.isNotBlank(roomParameters))
-        {
+//        if (StringUtils.isNotBlank(roomParameters))
+//        {
+            print("APPEND QUESTION MARKS.......");
             url += "?" + roomParameters;
-        }
+//        }
 
-        boolean appendHash = true;
+        print("NO HASH!!!");
+        boolean appendHash = false; // RD was true...
         StringBuilder urlBuilder = new StringBuilder(url);
         for (Map.Entry<String, String> entry : fragmentParams.entrySet())
         {
