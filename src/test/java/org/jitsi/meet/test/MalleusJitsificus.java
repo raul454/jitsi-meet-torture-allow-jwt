@@ -36,8 +36,8 @@ public class MalleusJitsificus
      * The video file to use as input for the first participant (the sender).
      */
     private static final String INPUT_VIDEO_FILE
-        = "resources/FakeVideoStream.y4m";
-//            = "resources/FourPeople_1280x720_30.y4m";
+//        = "resources/FakeVideoStream.y4m";
+            = "resources/FourPeople_1280x720_30.y4m";
 
     public static final String CONFERENCES_PNAME
         = "org.jitsi.malleus.conferences";
@@ -169,7 +169,7 @@ public class MalleusJitsificus
                 // XXX I don't remember if/why these are needed.
                     .appendConfig("config.p2p.useStunTurn=true")
                     .appendConfig("config.disable1On1Mode=false")
-                    .appendConfig("config.testing.noAutoPlayVideo=true")
+                    .appendConfig("config.testing.noAutoPlayVideo=false") // 4/20/21 WAS true
                     .appendConfig("config.pcStatsInterval=10000")
                     .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"))
                     .appendConfig(jwt, false);
@@ -283,6 +283,9 @@ public class MalleusJitsificus
 
         if (!errors.isEmpty())
         {
+            for(int i = 0; i < errors.size(); i++){
+                print("ERROR #" + i + " ---> " + errors.get(i).toString());
+            }
             throw new Exception("Failed with multiple errors. Throws the primary.", errors.get(0));
         }
     }
