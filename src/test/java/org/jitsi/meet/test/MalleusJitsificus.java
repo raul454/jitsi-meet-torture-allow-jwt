@@ -32,6 +32,13 @@ import java.util.stream.*;
 public class MalleusJitsificus
     extends WebTestBase
 {
+
+    /**
+     * The config fragment which enables P2P test mode.
+     */
+    public final static String MANUAL_P2P_MODE_FRAGMENT
+            = "config.testing.p2pTestMode=true";
+
     /**
      * The video file to use as input for the first participant (the sender).
      */
@@ -169,9 +176,11 @@ public class MalleusJitsificus
                 // XXX I don't remember if/why these are needed.
                     .appendConfig("config.p2p.useStunTurn=true")
                     .appendConfig("config.disable1On1Mode=false")
-                    .appendConfig("config.testing.noAutoPlayVideo=false") // 4/20/21 WAS true
+                    .appendConfig("config.testing.noAutoPlayVideo=false") // 4/20/21 WAS true, setting to false helps with getting video to play
                     .appendConfig("config.pcStatsInterval=10000")
-                    .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"))
+//                    .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"))
+                    .appendConfig("config.p2p.enabled=false") // 4/22/21, can set to false to force JVB connections only(?)
+//                    .appendConfig(config.testing.p2pTestMode=true)
                     .appendConfig(jwt, false);
 
             if (useStageView)
