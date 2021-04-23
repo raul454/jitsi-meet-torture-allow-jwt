@@ -153,6 +153,11 @@ public class WebParticipant extends Participant<WebDriver>
         });
     }
 
+    private void print(String s)
+    {
+        System.err.println(s);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -168,7 +173,8 @@ public class WebParticipant extends Participant<WebDriver>
         // even there is a TimeoutException the page is loaded correctly
         // and driver is operating, we just lower the page load timeout
         // default is 3 minutes and we log and skip this exception
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+//        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
         try
         {
             driver.get(conferenceUrl.toString());
@@ -195,7 +201,6 @@ public class WebParticipant extends Participant<WebDriver>
         {
             // disables animations
             executeScript("try { jQuery.fx.off = true; } catch(e) {}");
-
             executeScript("APP.UI.dockToolbar(true);");
 
             // disable keyframe animations (.fadeIn and .fadeOut classes)
