@@ -179,8 +179,8 @@ public class MalleusJitsificus
                     .appendConfig("config.testing.noAutoPlayVideo=false") // 4/20/21 WAS true, setting to false helps with getting video to play
                     .appendConfig("config.pcStatsInterval=10000")
 //                    .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"))
-                    .appendConfig("config.p2p.enabled=false") // 4/22/21, can set to false to force JVB connections only
-//                    .appendConfig("config.p2p.enabled=true")
+//                    .appendConfig("config.p2p.enabled=false") // 4/22/21, can set to false to force JVB connections only
+                    .appendConfig("config.p2p.enabled=true")
 //                    .appendConfig(config.testing.p2pTestMode=true)
                     .appendConfig(jwt, false);
 
