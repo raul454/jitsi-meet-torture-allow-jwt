@@ -36,8 +36,8 @@ public class MalleusJitsificus
     /**
      * The config fragment which enables P2P test mode.
      */
-    public final static String MANUAL_P2P_MODE_FRAGMENT
-            = "config.testing.p2pTestMode=true";
+//    public final static String MANUAL_P2P_MODE_FRAGMENT
+//            = "config.testing.p2pTestMode=true";
 
     /**
      * The video file to use as input for the first participant (the sender).
@@ -54,8 +54,8 @@ public class MalleusJitsificus
         = "org.jitsi.malleus.senders";
     public static final String AUDIO_SENDERS_PNAME
         = "org.jitsi.malleus.audio_senders";
-    public static final String ENABLE_P2P_PNAME
-        = "org.jitsi.malleus.enable_p2p";
+//    public static final String ENABLE_P2P_PNAME
+//        = "org.jitsi.malleus.enable_p2p";
     public static final String DURATION_PNAME
         = "org.jitsi.malleus.duration";
     public static final String ROOM_NAME_PREFIX_PNAME
@@ -76,6 +76,8 @@ public class MalleusJitsificus
         = "org.jitsi.malleus.use_stage_view";
     public static final String JWT
         = "org.jitsi.malleus.jwt";
+    public static final String P2P_ENABLED
+            = "org.jitsi.malleus.p2p_enabled";
 
     private final Phaser allHungUp = new Phaser();
 
@@ -127,9 +129,9 @@ public class MalleusJitsificus
             roomNamePrefix = "anvil-";
         }
 
-        String enableP2pStr = System.getProperty(ENABLE_P2P_PNAME);
-        boolean enableP2p
-            = enableP2pStr == null || Boolean.parseBoolean(enableP2pStr);
+//        String enableP2pStr = System.getProperty(ENABLE_P2P_PNAME);
+//        boolean enableP2p
+//            = enableP2pStr == null || Boolean.parseBoolean(enableP2pStr);
 
 //        boolean enableP2p = false; // RD 4/12/21, no peer to peer for now
 
@@ -150,7 +152,14 @@ public class MalleusJitsificus
         context.getCurrentXmlTest().getSuite()
             .setDataProviderThreadCount(numConferences);
 
-        print("will run withe:");
+        String p2p_enabled = System.getProperty(P2P_ENABLED);
+        if(p2p_enabled.toLowerCase().equals("true")){
+            p2p_enabled = "config.p2p.enabled=true";
+        } else {
+            p2p_enabled = "config.p2p.enabled=false";
+        }
+
+        print("will run with:");
         print("conferences="+ numConferences);
         print("participants=" + numParticipants);
         print("senders=" + numSenders);
@@ -158,13 +167,15 @@ public class MalleusJitsificus
         print("duration=" + durationMs + "ms");
         print("join delay=" + joinDelayMs + "ms");
         print("room_name_prefix=" + roomNamePrefix);
-        print("enable_p2p=" + enableP2p);
+        print("enable_p2p=" + p2p_enabled);
         print("max_disrupted_bridges_pct=" + maxDisruptedBridges);
         print("regions=" + (regions == null ? "null" : Arrays.toString(regions)));
         print("stage view=" + useStageView);
 
         String jwt = System.getProperty(JWT);
         jwt = "jwt=" + jwt;
+
+
 
         Object[][] ret = new Object[numConferences][4];
         for (int i = 0; i < numConferences; i++)
@@ -179,8 +190,9 @@ public class MalleusJitsificus
                     .appendConfig("config.testing.noAutoPlayVideo=false") // 4/20/21 WAS true, setting to false helps with getting video to play
                     .appendConfig("config.pcStatsInterval=10000")
 //                    .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"))
-                    .appendConfig("config.p2p.enabled=false") // 4/22/21, can set to false to force JVB connections only
+//                    .appendConfig("config.p2p.enabled=false") // 4/22/21, can set to false to force JVB connections only
 //                    .appendConfig("config.p2p.enabled=true")
+                    .appendConfig(p2p_enabled)
 //                    .appendConfig(config.testing.p2pTestMode=true)
                     .appendConfig(jwt, false);
 
