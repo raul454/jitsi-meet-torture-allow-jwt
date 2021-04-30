@@ -153,6 +153,9 @@ public class MalleusJitsificus
             .setDataProviderThreadCount(numConferences);
 
         String p2p_enabled = System.getProperty(P2P_ENABLED);
+
+        print("p2p_enabled is: " + p2p_enabled);
+
         if(p2p_enabled.toLowerCase().equals("true")){
             p2p_enabled = "config.p2p.enabled=true";
         } else {
