@@ -77,7 +77,7 @@ public class MalleusJitsificus
     public static final String JWT
         = "org.jitsi.malleus.jwt";
     public static final String P2P_ENABLED
-            = "org.jitsi.malleus.p2p_enabled";
+            = "org.jitsi.malleus.p_to_p_enabled";
 
     private final Phaser allHungUp = new Phaser();
 
