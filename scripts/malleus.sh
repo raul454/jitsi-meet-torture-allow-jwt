@@ -5,7 +5,7 @@ if [ -n "$DEBUG" ]; then
 fi
 
 usage() {
-  echo "Usage: $0 [--p2p-enabled=MALLEUS_P_TO_P_ENABLED] [--jwt=MALLEUS_JWT] [--conferences=MALLEUS_CONFERENCES] [--participants=MALLEUS_PARTICIPANTS] [--senders=MALLEUS_SENDERS] [--audio-senders=MALLEUS_AUDIO_SENDERS] [--senders-per-node=MALLEUS_SENDERS_PER_NODE] [--receivers-per-node=MALLEUS_RECEIVERS_PER_NODE] [--duration=MALLEUS_DURATION (s)] [--join-delay=MALLEUS_JOIN_DELAY (ms)] [--room-name-prefix=MALLEUS_ROOM_NAME_PREFIX] [--hub-url=MALLEUS_HUB_URL] [--instance-url=MALLEUS_INSTANCE_URL] [--regions=MALLEUS_REGIONS] [--use-node-types] [--use-load-test] [--max-disrupted-bridges-pct=MALLEUS_MAX_DISRUPTED_BRIDGES_PCT] [--debug] [--switch-speakers] [--use-stage-view]" >&2
+  echo "Usage: $0 [--p-to-p-enabled=MALLEUS_P_TO_P_ENABLED] [--jwt=MALLEUS_JWT] [--conferences=MALLEUS_CONFERENCES] [--participants=MALLEUS_PARTICIPANTS] [--senders=MALLEUS_SENDERS] [--audio-senders=MALLEUS_AUDIO_SENDERS] [--senders-per-node=MALLEUS_SENDERS_PER_NODE] [--receivers-per-node=MALLEUS_RECEIVERS_PER_NODE] [--duration=MALLEUS_DURATION (s)] [--join-delay=MALLEUS_JOIN_DELAY (ms)] [--room-name-prefix=MALLEUS_ROOM_NAME_PREFIX] [--hub-url=MALLEUS_HUB_URL] [--instance-url=MALLEUS_INSTANCE_URL] [--regions=MALLEUS_REGIONS] [--use-node-types] [--use-load-test] [--max-disrupted-bridges-pct=MALLEUS_MAX_DISRUPTED_BRIDGES_PCT] [--debug] [--switch-speakers] [--use-stage-view]" >&2
   exit 1
 }
 
@@ -100,7 +100,7 @@ case $1 in
         --instance-url) MALLEUS_INSTANCE_URL=$optvalue;;
         --regions) MALLEUS_REGIONS=$optvalue;;
         --jwt) MALLEUS_JWT=$optvalue;;
-        --p2p-enabled) MALLEUS_P_TO_P_ENABLED=$optvalue;;
+        --p-to-p-enabled) MALLEUS_P_TO_P_ENABLED=$optvalue;;
         --use-node-types) if [ -n "$optvalue" ]; then MALLEUS_USE_NODE_TYPES=$optvalue; else MALLEUS_USE_NODE_TYPES=true; fi;;
         --use-load-test) if [ -n "$optvalue" ]; then MALLEUS_USE_LOAD_TEST=$optvalue; else MALLEUS_USE_LOAD_TEST=true; fi;;
         --switch-speakers) if [ -n "$optvalue" ]; then MALLEUS_SWITCH_SPEAKERS=$optvalue; else MALLEUS_SWITCH_SPEAKERS=true; fi;;
